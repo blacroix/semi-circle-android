@@ -3,7 +3,6 @@ package fr.blacroix.semicircle;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -15,14 +14,14 @@ import static android.graphics.Paint.Style.FILL;
 
 public class SemiCircleView extends View {
 
+    public static final float MAX_ANGLE = 180;
+
     private static final int START_ANGLE = -180;
 
     private final RectF rectF = new RectF();
     private final Paint paint = new Paint();
 
     private float angle = 0;
-
-    private int color = RED;
 
     public SemiCircleView(Context context) {
         super(context);
@@ -44,14 +43,12 @@ public class SemiCircleView extends View {
             @Override
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Rect rect = new Rect();
-                getLocalVisibleRect(rect);
-                rectF.set(rect);
+                rectF.set(0, 0, getWidth(), getWidth());
             }
         });
         paint.setAntiAlias(true);
         paint.setStyle(FILL);
-        paint.setColor(color);
+        paint.setColor(RED);
     }
 
     @Override
@@ -68,7 +65,7 @@ public class SemiCircleView extends View {
      * @param color int color not Resource color
      */
     public void setColor(int color) {
-        this.color = color;
+        paint.setColor(color);
     }
 
     public float getAngle() {
