@@ -15,6 +15,8 @@ import static android.graphics.Paint.Style.FILL;
 
 public class SemiCircleView extends View {
 
+    private static final int START_ANGLE = -180;
+
     private final RectF rectF = new RectF();
     private final Paint paint = new Paint();
 
@@ -55,13 +57,16 @@ public class SemiCircleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawArc(rectF, -180, angle, true, paint);
+        canvas.drawArc(rectF, START_ANGLE, angle, true, paint);
     }
 
     public void setAngle(float angle) {
         this.angle = angle;
     }
 
+    /**
+     * @param color int color not Resource color
+     */
     public void setColor(int color) {
         this.color = color;
     }
